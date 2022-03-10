@@ -54,10 +54,10 @@ async def save_file(media):
         try:
             await file.commit()
         except DuplicateKeyError:      
-            logger.warning(media.file_name + " is already saved in database")
+            logger.warning(f'{media.file_name} is already saved in database')
             return False, 0
         else:
-            logger.info(media.file_name + " is saved in database")
+            logger.info(f'{media.file_name} is saved in database')
             return True, 1
 
 
@@ -69,12 +69,12 @@ async def get_search_results(query, file_type=None, max_results=10, offset=0, fi
     if not query:
         raw_pattern = '.'
     elif ' ' not in query:
-        raw_pattern = r'(\b|[\.\+\-_])' + query + r'(\b|[\.\+\-_])'
+        raw_pattern = f'(\\b|[\\.\\+\\-_]){query}(\\b|[\\.\\+\\-_])'
     else:
         raw_pattern = query.replace(' ', r'.*[\s\.\+\-_]')
     if filter:
         #better ?
-        raw_pattern = r'([a-zA-Z0-9\.\+\-_])*?' + query + r'([a-zA-Z0-9\.\+\-_])*?'
+        raw_pattern = f'([a-zA-Z0-9\\.\\+\\-_])*?{query}([a-zA-Z0-9\\.\\+\\-_])*?'
         raw_pattern = query.replace(' ', r'(\s|\.|\+|\-|_)*?')
     try:
         regex = re.compile(raw_pattern, flags=re.IGNORECASE)

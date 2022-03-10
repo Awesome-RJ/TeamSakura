@@ -9,15 +9,9 @@ from info import (
 @Client.on_message(filters.command('logo', COMMAND_HAND_LER))
 async def lego(event):
  quew = event.pattern_match.group(100)
- if event.sender_id == ADMINS:
-     pass
- else:
-     
-    if not quew:
-       await event.reply('Provide Some Text To Draw!')
-       return
-    else:
-       pass
+ if event.sender_id != ADMINS and not quew:
+  await event.reply('Provide Some Text To Draw!')
+  return
  await event.reply('Creating your logo...wait!')
  try:
     text = event.pattern_match.group(100)

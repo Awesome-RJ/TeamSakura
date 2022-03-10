@@ -36,7 +36,7 @@ def covid_info(country_name):
         latitude = info['latitude']
         longitude = info['longitude']
         recovered = info['recovered']
-        covid_info = f"""--**Covid 19 Information**--
+        return f"""--**Covid 19 Information**--
 
 Country : `{country}`
 Actived : `{active}`
@@ -49,7 +49,7 @@ Longitude : `{longitude}`
 Recovered : `{recovered}`
 
 Made by @SakuraBotUpdates ❤️"""
-        return covid_info
+
     except Exception as error:
         return error
 
